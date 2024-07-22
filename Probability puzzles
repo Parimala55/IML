@@ -1,0 +1,27 @@
+from fractions import Fraction
+
+def probability_black_ball(W_A, B_A, W_B, B_B):
+    # Probabilities of drawing each color from Bag A
+    p_white_from_A = Fraction(W_A, W_A + B_A)
+    p_black_from_A = Fraction(B_A, W_A + B_A)
+    
+    # Probability of drawing a black ball from Bag B given a white ball was transferred
+    p_black_given_white_from_A = Fraction(B_B, W_B + 1 + B_B)
+    
+    # Probability of drawing a black ball from Bag B given a black ball was transferred
+    p_black_given_black_from_A = Fraction(B_B + 1, W_B + 1 + B_B)
+    
+    # Total probability of drawing a black ball from Bag B
+    p_black_from_B = (p_white_from_A * p_black_given_white_from_A) + (p_black_from_A * p_black_given_black_from_A)
+    
+    return p_black_from_B
+
+# Example values
+W_A = 3
+B_A = 4
+W_B = 1
+B_B = 3
+
+# Calculate the probability
+result = probability_black_ball(W_A, B_A, W_B, B_B)
+print(result)  # Output the result as a fraction
